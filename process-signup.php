@@ -28,7 +28,7 @@ $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = "INSERT INTO userlogin (name, email, password_hash)
+$sql = "INSERT INTO user (name, email, password_hash)
         VALUES (?, ?, ?)";
 
 $stmt = $mysqli->stmt_init();
@@ -41,12 +41,15 @@ $stmt->bind_param("sss",
                     $_POST["email"],
                     $password_hash);
 
-$stmt->execute();
+if ($stmt->execute()) {
 
-echo "Signup successful";
+    header("Location: ./public/signup-success.html");
+    exit;
 
-
-
-
-/*print_r($_POST);
-var_dump($password_hash);*/
+} else {
+    if ($mysqli->errno === 1062) {
+        die("email is already taken");
+    } else {
+    die($mysqli->error . "" . $mysqli->errno);
+    }
+}

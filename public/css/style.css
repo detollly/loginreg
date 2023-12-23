@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+.container{
+    background-image: linear-gradient(to right bottom, #120b1e, #18122a, #201637, #291a43, #331e50, #392058, #402360, #472568, #4b276d, #4f2973, #532b78, #572d7e);
+    width: 100%;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    padding: 0 5%;    
+}
+nav{
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+.button{
+    padding-top: 5px;
+    display: grid;
+}
+nav .btn{
+    display: inline-block;
+    margin-top: 50px;
+    background: #f49651;
+    columns: #1c0f29;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 15px 30px;
+    border-radius: 30px;
+}
+.logo{
+    cursor: pointer;
+}
+nav ul{
+    flex: 1;
+}
+nav ul li{
+    display: inline-block;
+    margin: 10px 20px;
+}
+nav ul li a{
+    color: #f49651;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    color: rgb(255, 0, 0);
+}
+.current,
+nav li a:hover {
+    font-size: 22px;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+.content{
+    margin-top: 15%;
+    margin-bottom: 20px;
+}
+.content h1{
+    font-size: 80px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+.content p{
+    padding-top: 10px;
+    padding-left: 30px;
+    font-size: 30px;
+    color: #ffffff;
+}
+.content span{
+    color: #f49651;
+}
+.coin-list{
+    position: absolute;
+    right: 10%;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+.coin{
+    display: flex;
+    align-items:baseline;
+    flex-wrap: wrap;
+    font-size: 16px;
+    margin: 0 15px 50px;
+    color: #99d100;
+    border: 1px solid #fff;
+    border-radius: 8px;
+}
+.coin img{
+    margin-right: 10px;
+}
+.coin p{
+    margin-left: 15px;
+    color: #ff4093;
+    font-size: 20px;
+    font-weight: bold;
+}
+.text{
+    margin: 20px 10% 0 0;
+    font-size: 18px;
+    color: #f49651;
+}
+.footer{
+    padding: 50px 0 50px 10%;
+    background-color: #f49651;
+    display: flex;
+}   
+.footer p{
+    font-size: 16px;
+    padding-top: 15px;
+    padding-right: 50px;
+}
+.text{
+    margin: 0 10%;
+    font-size: 18px;
+    text-align: justify;
+    color: #d1d1d1;
+}

@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/form.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="./public/js/validation.js" defer></script>
 </head>
 <body>
-    <h1>Signup</h1>
-    <form action="process-signup.php" method="post" novalidate>
-        <div>
+    <div class="box">
+        <h1>Signup</h1>
+    <form action="./process-signup.php" method="post" id="signup" novalidate>
             <label for="name">Name</label>
             <input type="text" id="name" name="name">
-        </div>
-        <div>
+
             <label for="email">email</label>
             <input type="email" id="email" name="email">
-        </div>
-        <div>
+
             <label for="password">password</label>
             <input type="password" id="password" name="password">
-        </div>
-        <div>
+
             <label for="password_confirmation">Repeat password</label>
             <input type="password" id="password_confirmation" name="password_confirmation">
-        </div>
-        <button>Sign up</button>
+
+            <h3>Already have an account? <a href="../login.php">Log in</a></h3>
+
+            <button>Sign up</button>
     </form>
+    </div>
     
 </body>
 </html>
