@@ -1,47 +1,36 @@
 <?php
 
-$isInvalid = false;
+$is_invalid = false;
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Include the database connection file
+    
     $mysqli = require __DIR__ . "/database.php";
 
-    // Validate and sanitize user input
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $password = $_POST["password"];
+    $sql = sprintf("SELECT * FROM user
+                   WHERE email = '%s'",
+                   $mysqli->real_escape_string($_POST["email"]));
 
-    if (!$email || !$password) {
-        $isInvalid = true; // Invalid input
-    } else {
-        // Use prepared statement to prevent SQL injection
-        $sql = "SELECT id, email, password_hash FROM user WHERE email = ?";
-        $stmt = $mysqli->prepare($sql);
+    $result = $mysqli->query($sql);
 
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
+    $user = $result->fetch_assoc();
 
-            $result = $stmt->get_result();
-            $user = $result->fetch_assoc();
+    if ($user) {
+        if (password_verify($_POST["password"], $user["password_hash"])) {
+            
+            session_start();
 
-            if ($user && password_verify($password, $user["password_hash"])) {
-                // Start a secure session
-                session_start();
-                session_regenerate_id();
+            session_regenerate_id();
 
-                $_SESSION["user_id"] = $user["id"];
+            $_SESSION["user_id"] = $user["id"];
 
-                header("Location: public/index.html");
-                exit;
-            } else {
-                $isInvalid = true; // Invalid login credentials
-            }
-
-            $stmt->close();
-        } else {
-            die("Error preparing statement: " . $mysqli->error);
+            header("Location: public/index.html");
+            exit;
         }
     }
+
+    $is_invalid = true;
+    
 }
 
 ?>
@@ -57,24 +46,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <div class="box">
-        <h2>Login</h2>
+    <h2>Login</h2>
 
-        <?php if ($isInvalid): ?>
-            <em>Invalid login</em>
-        <?php endif; ?>
+<?php if ($is_invalid): ?>
+    <em>Invalid login</em>
+<?php endif; ?>
 
-        <form method="post">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email"
-                    value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" required>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+<form method="post">
+    <label for="email">email</label>
+    <input type="email" name="email" id="email"
+            value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
 
-            <h3>Don't have an account? <a href="./public/signup.html">Sign up</a></h3> 
+    <label for="password">password</label>
+    <input type="password" name="password" id="password">
 
-            <button type="submit">Log in</button>
-        </form>
+    <h3>Don't have an account? <a href="./public/signup.html">Sign up</a></h3> 
+
+    <button>Log in</button>
+</form>
     </div>
+
 </body>
 </html>
