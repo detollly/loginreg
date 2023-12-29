@@ -6,11 +6,7 @@ if (isset($_SESSION["user_id"])) {
     
     $mysqli = require __DIR__ . "/database.php";
     
-    $sql = "SELECT * FROM user
-            WHERE id = {$_SESSION["user_id"]}";
-            
-    $result = $mysqli->query($sql);
-    
+            throw new Exception("Failed to include the database connection file.");
     $user = $result->fetch_assoc();
 }
 
