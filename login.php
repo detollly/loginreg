@@ -1,9 +1,11 @@
 <?php
 
-$is_invalid = false;
+$isInvalid = false;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // the database connection file
     
     $mysqli = require __DIR__ . "/database.php";
 
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $is_invalid = true;
+    $isInvalid = true;
     
 }
 
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="box">
     <h2>Login</h2>
 
-<?php if ($is_invalid): ?>
+<?php if ($isInvalid): ?>
     <em>Invalid login</em>
 <?php endif; ?>
 
