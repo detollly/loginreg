@@ -5,6 +5,8 @@ $is_invalid = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    // the database connection file
+
     $mysqli = require __DIR__ . "/database.php";
 
     $sql = sprintf("SELECT * FROM user
