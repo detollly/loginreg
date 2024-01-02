@@ -5,13 +5,11 @@ $mysqli = require __DIR__ . "/database.php";
 $sql = sprintf("SELECT * FROM user
                 WHERE email = '%s'",
                 $mysqli->real_escape_string($_GET["email"]));
-
+                
 $result = $mysqli->query($sql);
-
-$result->num_rows === 0;
 
 $is_available = $result->num_rows === 0;
 
-header ("Content-Type: application/json");
+header("Content-Type: application/json");
 
 echo json_encode(["available" => $is_available]);

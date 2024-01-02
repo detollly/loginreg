@@ -1,12 +1,10 @@
 <?php
 
-$isInvalid = false;
+$is_invalid = false;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // the database connection file
-    
     $mysqli = require __DIR__ . "/database.php";
 
     $sql = sprintf("SELECT * FROM user
@@ -19,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         if (password_verify($_POST["password"], $user["password_hash"])) {
-            
+
             session_start();
 
             session_regenerate_id();
@@ -31,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $isInvalid = true;
-    
+    $is_invalid = true;
+
 }
 
 ?>
@@ -50,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="box">
     <h2>Login</h2>
 
-<?php if ($isInvalid): ?>
+<?php if ($is_invalid): ?>
     <em>Invalid login</em>
 <?php endif; ?>
 

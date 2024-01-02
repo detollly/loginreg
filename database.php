@@ -1,5 +1,4 @@
 <?php
-
 $host = "localhost";
 $dbname = "login_db";
 $username = "root";
@@ -13,5 +12,4 @@ $mysqli = new mysqli(hostname: $host,
 if ($mysqli->connect_errno) {
     die("Connection error: " . $mysqli->connect_error);
 }
-
 return $mysqli;
